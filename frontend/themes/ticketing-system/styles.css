@@ -1,0 +1,11 @@
+@import url('./main-layout.css');
+@import url('./views/submit-ticket-view.css');
+@import url('./views/ticket-status-view.css');
+@import url('./views/ticket-submission-view.css');    html {
+      --lumo-primary-color-50pct: hsla(214, 100%, 50%, 0.5);
+      --lumo-primary-color-10pct: hsla(214, 100%, 50%, 0.1);
+      --lumo-primary-color: hsl(214, 100%, 50%);
+      --lumo-primary-text-color: hsl(42, 100%, 37%);
+      --lumo-base-color: #fbd746;
+
+    }

@@ -1,0 +1,24 @@
+.ticket-status-view {
+  display: block;
+  height: 100%;
+}
+.ticket-status-view vaadin-grid-pro {
+  height: 100%;
+}
+.ticket-status-view vaadin-grid-filter,
+.ticket-status-view vaadin-grid-filter > * {
+  width: 100%;
+}
+.ticket-status-view vaadin-grid-pro vaadin-horizontal-layout {
+  align-items: center;
+}
+.ticket-status-view vaadin-grid-pro img {
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: var(--lumo-size-m);
+  width: var(--lumo-size-m);
+}
+.ticket-status-view .name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
