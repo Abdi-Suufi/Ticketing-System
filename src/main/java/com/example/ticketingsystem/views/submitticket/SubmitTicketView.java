@@ -24,13 +24,15 @@ public class SubmitTicketView extends Composite<VerticalLayout> {
         TextField textField = new TextField();
         TextField textField2 = new TextField();
         Button buttonPrimary = new Button();
+        //<theme-editor-local-classname>
+        buttonPrimary.addClassName("submit-ticket-view-button-1");
         getContent().setWidth("100%");
         getContent().getStyle().set("flex-grow", "1");
         textField.setLabel("Issue Topic");
         textField.setWidth("min-content");
         textField2.setLabel("Description");
         textField2.setWidth("min-content");
-        buttonPrimary.setText("Button");
+        buttonPrimary.setText("Submit");
         buttonPrimary.setWidth("min-content");
         buttonPrimary.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         getContent().add(textField);
