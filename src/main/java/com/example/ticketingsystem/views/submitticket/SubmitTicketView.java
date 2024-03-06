@@ -31,23 +31,23 @@ public class SubmitTicketView extends Composite<VerticalLayout> {
         HorizontalLayout column2 = new HorizontalLayout();
 
         // Adding ComboBoxes to the second column
-        ComboBox<String> comboBox1 = new ComboBox<>("Effect");
-        comboBox1.setPlaceholder("Choose");
+        ComboBox<String> EffectComboBox = new ComboBox<>("Effect");
+        EffectComboBox.setPlaceholder("Choose");
 
         // Populate ComboBox2 with choices
-        comboBox1.setItems("Low", "Medium", "High");
+        EffectComboBox.setItems("Low", "Medium", "High");
 
-        ComboBox<String> comboBox2 = new ComboBox<>("Priority");
-        comboBox2.setPlaceholder("Choose");
+        ComboBox<String> PriorityComboBox = new ComboBox<>("Priority");
+        PriorityComboBox.setPlaceholder("Choose");
 
         // Populate ComboBox2 with choices
-        comboBox2.setItems("Low", "Medium", "High");
+        PriorityComboBox.setItems("Low", "Medium", "High");
 
-        //makes no sense to me. its in a row instead of column
-        column2.add(comboBox1, comboBox2);
+        //makes no sense to me. it's in a row instead of column
+        column2.add(EffectComboBox, PriorityComboBox);
 
-        Button buttonPrimary = new Button("Submit");
-        buttonPrimary.addClassName("submit-ticket-view-button-1");
+        Button Submit = new Button("Submit");
+        Submit.addClassName("submit-ticket-view-button-1");
 
         getContent().setWidth("100%");
         getContent().getStyle().set("flex-grow", "1");
@@ -55,11 +55,11 @@ public class SubmitTicketView extends Composite<VerticalLayout> {
         column1.setWidth("min-content");
         column2.setWidth("min-content");
 
-        buttonPrimary.setWidth("min-content");
-        buttonPrimary.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        Submit.setWidth("min-content");
+        Submit.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
         getContent().add(column1);
         getContent().add(column2);
-        getContent().add(buttonPrimary);
+        getContent().add(Submit);
     }
 }

@@ -2,6 +2,7 @@ package com.example.ticketingsystem;
 
 import com.example.ticketingsystem.data.SamplePersonRepository;
 import com.vaadin.flow.component.page.AppShellConfigurator;
+import com.vaadin.flow.server.PWA;
 import com.vaadin.flow.theme.Theme;
 import javax.sql.DataSource;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +20,7 @@ import org.springframework.context.annotation.Bean;
  */
 @SpringBootApplication
 @Theme(value = "ticketing-system")
+@PWA(name = "Your Application Name", shortName = "Short Name", iconPath = "./resources/icon.jpg")
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {
