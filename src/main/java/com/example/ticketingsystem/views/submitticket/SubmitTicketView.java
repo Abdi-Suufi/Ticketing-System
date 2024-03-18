@@ -1,5 +1,9 @@
 package com.example.ticketingsystem.views.submitticket;
 
+import java.lang.String;
+import org.camunda.bpm.engine.delegate.BpmnError;
+import org.camunda.bpm.engine.delegate.DelegateExecution;
+import org.camunda.bpm.engine.delegate.JavaDelegate;
 import com.example.ticketingsystem.views.MainLayout;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
@@ -41,23 +45,37 @@ public class SubmitTicketView extends Composite<VerticalLayout> {
         ComboBox<String> PriorityComboBox = new ComboBox<>("Priority");
         PriorityComboBox.setPlaceholder("Choose");
 
-        // Populate ComboBox2 with choices
+        // Populate ComboBox2 with low medium and high
         PriorityComboBox.setItems("Low", "Medium", "High");
 
         //makes no sense to me. it's in a row instead of column
         column2.add(EffectComboBox, PriorityComboBox);
 
         Button Submit = new Button("Submit");
-        Submit.setEnabled(false); // disabled by default until condition in the if statement below isn't met
+        // Submit.setEnabled(false);  // disabled by default until condition in the if statement below isn't met
 
         Submit.addClickListener(click -> {
-            if (textField.getValue().length() < 2 || textField.isEmpty() || textField2.getValue().length() < 2 || textField2.isEmpty() || EffectComboBox.isEmpty() || PriorityComboBox.isEmpty()) {
-                Notification.show("Please fill all fields and make selections.");
+            if(textField != null || textField2 != null || EffectComboBox != null || PriorityComboBox != null) {
+                String textFieldValue = textField.getValue();//turning the characters into a number for later error handling
+                String textField2Value = textField2.getValue();
+                if (textFieldValue.length() < 2) {
+                    throw new BpmnError("Incomplete_first_name_Field", "First Name must be at least 2 characters long");
+                } else if (textField2Value.length() < 2) {
+                    throw new BpmnError("Incomplete_last_name_Field", "Last Name must be at least 2 characters long");
+                } else if(/*textField.isBlank() || */ textField.isEmpty()) { //isBlank is for the case of only whitespace being used and empty is if its just straight-up empty
+                    throw new BpmnError("Incomplete_first_name_Field", "First Name can not be empty");
+                } else if(textField2.isEmpty()) {
+                    throw new BpmnError("Incomplete_last_name_Field", "Last Name can not be empty");
+                } else if(EffectComboBox.isEmpty()) {
+                    throw new BpmnError("Incomplete_effect_choice_Field", "Choose effect level");
+                } else if(PriorityComboBox.getOptionalValue().isEmpty()) {
+                    throw new BpmnError("Incomplete_priority_choice_Field", "Choose priority level");
+                }
             } else {
-                Submit.setEnabled(true);
-                // Logic needed here so that when submit is clicked on, ticket submission will pop up on ticket status page
-            }});
-        Submit.addClassName("submit-ticket-view-button-1");
+                throw new BpmnError("Incomplete_ticket_submission_form_Field", "Ticket Submission must be complete");
+            }
+
+            Submit.addClassName("submit-ticket-view-button-1");
 
         getContent().setWidth("100%");
         getContent().getStyle().set("flex-grow", "1");
@@ -71,5 +89,6 @@ public class SubmitTicketView extends Composite<VerticalLayout> {
         getContent().add(column1);
         getContent().add(column2);
         getContent().add(Submit);
+    });
     }
 }
