@@ -13,6 +13,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import com.vaadin.flow.component.notification.Notification;
 import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("Submit Ticket")
@@ -47,6 +48,15 @@ public class SubmitTicketView extends Composite<VerticalLayout> {
         column2.add(EffectComboBox, PriorityComboBox);
 
         Button Submit = new Button("Submit");
+        Submit.setEnabled(false); // disabled by default until condition in the if statement below isn't met
+
+        Submit.addClickListener(click -> {
+            if (textField.getValue().length() < 2 || textField.isEmpty() || textField2.getValue().length() < 2 || textField2.isEmpty() || EffectComboBox.isEmpty() || PriorityComboBox.isEmpty()) {
+                Notification.show("Please fill all fields and make selections.");
+            } else {
+                Submit.setEnabled(true);
+                // Logic needed here so that when submit is clicked on, ticket submission will pop up on ticket status page
+            }});
         Submit.addClassName("submit-ticket-view-button-1");
 
         getContent().setWidth("100%");
